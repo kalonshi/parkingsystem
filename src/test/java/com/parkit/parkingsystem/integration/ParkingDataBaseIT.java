@@ -80,7 +80,7 @@ public class ParkingDataBaseIT {
         Ticket ticket = ticketDAO.getTicket(inputReaderUtil.readVehicleRegistrationNumber());
 
 		/* check that the fare generated is populated correctly in the database */
-		Assert.assertTrue(ticket.getPrice() > 0);
+		Assert.assertTrue(ticket.getPrice() >= 0);
 
 		/* check that the out time is populated correctly in the database */
 		Assert.assertTrue(ticket.getOutTime() != null);
