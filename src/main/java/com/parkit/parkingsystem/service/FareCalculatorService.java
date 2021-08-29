@@ -20,10 +20,14 @@ public class FareCalculatorService {
 		// TODO: Some tests are failing here. Need to check if this logic is correct
 		int duration = ((outDay * 24 * 60) + (outHour * 60) + outMinutes)
 				- ((inDay * 24 * 60) + (inHour * 60) + inMinutes);
-
+/* Ajout du parking gratuit pour une durée de stationnement de mioins d'une demi heure */
+		if (duration <=30) {
+	ticket.setPrice(0);
+}
+else 
 		switch (ticket.getParkingSpot().getParkingType()) {
 		case CAR: {
-			if (duration < 60) {
+			if ((duration >30)&&(duration < 60)) {
 				ticket.setPrice(0.75 * Fare.CAR_RATE_PER_HOUR);
 
 				break;
@@ -40,7 +44,7 @@ public class FareCalculatorService {
 			}
 		}
 		case BIKE: {
-			if (duration < 60) {
+			if ((duration >30)&&(duration < 60)) {
 				ticket.setPrice(0.75 * Fare.BIKE_RATE_PER_HOUR);
 
 				break;
@@ -49,8 +53,9 @@ public class FareCalculatorService {
 
 				break;
 			} else if ((duration >= 24 * 60)) {
-				System.out.println("duree>=24");
-				System.out.println(duration);
+				/*
+				 * System.out.println("duree>=24"); System.out.println(duration);
+				 */
 				ticket.setPrice((duration / 24) * 24 * Fare.BIKE_RATE_PER_HOUR);
 				break;
 			}
@@ -58,5 +63,8 @@ public class FareCalculatorService {
 		default:
 			throw new IllegalArgumentException("Unkown Parking Type");
 		}
+		
+		
+		
 	}
 }
