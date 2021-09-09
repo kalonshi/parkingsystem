@@ -32,7 +32,7 @@ public class InteractiveShell {
                     parkingService.processExitingVehicle();
                     break;
                 }
-                case 3: {
+                case 3: { 
                     System.out.println("Exiting from the system!");
                     continueApp = false;
                     break;

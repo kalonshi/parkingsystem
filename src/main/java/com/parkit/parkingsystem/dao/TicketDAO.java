@@ -87,25 +87,25 @@ public class TicketDAO {
 		return false;
 	}
 
-	// isReccurentCustomer?
-	public int getNbTickets(String vehicleRegNumber) {
+	/**
+	 *
+	 * Method for calculating the number of occurrences of vehicleRegNumber
+	 *
+	 * @param vehicleRegNumber, a string type
+	 * @return  NbTicketsByvehicleRegNumber ,a int Type
+	 *
+	 */
+	public int getNbTicketsByVehicleRegNumber(String vehicleRegNumber) {
 		Connection con = null;
-
 		try {
-			int nb=0;
+			int nb = 0;
 			con = dataBaseConfig.getConnection();
 			PreparedStatement ps = con.prepareStatement(DBConstants.GET_NB_TICKET_BY_VEHICULE);
 			ps.setString(1, vehicleRegNumber);
 			ResultSet rs = ps.executeQuery();
-			
 			if (rs.next()) {
-				 nb = Integer.parseInt(rs.getString(1));
-				/*
-				 * System.out.println(" Integer.parseInt(rs.getString(1))");
-				 * System.out.println(nb);
-				 */
+				nb = Integer.parseInt(rs.getString(1));
 			}
-
 			dataBaseConfig.closeResultSet(rs);
 			dataBaseConfig.closePreparedStatement(ps);
 			return nb;
