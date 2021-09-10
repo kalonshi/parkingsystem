@@ -35,12 +35,12 @@ public class ParkingService {
 				// Check if VehichleRegNumber is a Customer
 				if (checkVehichleRegNumber(vehicleRegNumber)) {
 					System.out.println("Welcome back!");
+					System.out.println("As a recurring user of our parking lot, you'll benefit from a 5% discount.");
 				}
 
 				parkingSpot.setAvailable(false);
 				parkingSpotDAO.updateParking(parkingSpot);// allot this parking space and mark it's availability as
 															// false
-
 				Date inTime = new Date();
 				Ticket ticket = new Ticket();
 				// ID, PARKING_NUMBER, VEHICLE_REG_NUMBER, PRICE, IN_TIME, OUT_TIME)
@@ -67,7 +67,8 @@ public class ParkingService {
 
 	/**
 	 *
-	 * Checking Method : if occurrences of vehicleRegNumber exist in the database more than once
+	 * Checking Method : if occurrences of vehicleRegNumber exist in the database
+	 * more than once
 	 *
 	 * @param vehicleRegNumber, a string type
 	 * @return boolean Type
@@ -129,9 +130,8 @@ public class ParkingService {
 			ticket.setOutTime(outTime);
 			fareCalculatorService.calculateFare(ticket);
 
-			
 			if (checkVehichleRegNumber(vehicleRegNumber)) {
-				Double PriceDiscount = ticket.getPrice() * (0.95); // Discount of 5% 
+				Double PriceDiscount = ticket.getPrice() * (0.95); // Discount of 5%
 				ticket.setPrice(PriceDiscount);
 			}
 
